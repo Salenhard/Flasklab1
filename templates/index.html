@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!DOCTYPE HTML>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/html">
+  <head>
+    <title>Самые высокие здания и сооружения</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+  <a href="/">Назад</a>
+  <br>
+  <a href="/type">Тип</a>
+  <br>
+  <a href="/year">Год</a>
+  <br>
+  <a href="/year-range">Год c 2000 по 2018</a>
+  <br>
+  <a href="/country">Город</a>
+    <h3>Список зданий</h3>
+   {% macro render_table(headers, rows) %}
+        <table>
+            <thead>
+                <tr>
+                    {% for header in headers %}
+                        <th>{{ header }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                    <tr>
+                        {% for value in row %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="{{ headers|length }}">Нет данных для отображения</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endmacro %}
 
-</body>
+    {{ render_table(buildings_head, buildings_body) }}
+  </body>
 </html>
