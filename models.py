@@ -1,10 +1,11 @@
 from config import db, app
 
+
 class Country(db.Model):
     __tablename__ = 'country'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column('Страна', db.String(100), nullable=False)
-    cities = db.relationship("City", back_populates="country")
+    cities = db.relationship("City", back_populates="country", cascade="all, delete")
 
     def __init__(self, name):
         self.name = name
@@ -40,6 +41,11 @@ class Building(db.Model):
         self.year = year
         self.height = height
 
+    def __str__(self):
+        return f"Building(id={self.id}, title={self.title}, type_building_id={self.type_building_id}, city_id={self.city_id}, year={self.year}, height={self.height})"
+
+    def __repr__(self):
+        return str(self)
 
 class TypeBuilding(db.Model):
     __tablename__ = "type_building"
@@ -49,6 +55,7 @@ class TypeBuilding(db.Model):
 
     def __init__(self, name):
         self.name = name
+
 
 app.app_context().push()
 
