@@ -1,6 +1,4 @@
-from app import app
-from config import db
-
+from config import db, app
 
 class Country(db.Model):
     __tablename__ = 'country'
@@ -51,7 +49,6 @@ class TypeBuilding(db.Model):
 
     def __init__(self, name):
         self.name = name
-
 
 app.app_context().push()
 

@@ -4,21 +4,10 @@ from sqlalchemy import func
 
 
 def get_all_buildings():
-    query = (
-        db.session.query(
-            Building.title.label("Здание"),
-            TypeBuilding.name.label("Тип"),
-            Country.name.label("Страна"),
-            City.name.label("Город"),
-            Building.year.label("Год"),
-            Building.height.label("Высота")
-        )
-        .select_from(Building)
-        .join(TypeBuilding)
-        .join(City)
-        .join(Country)
-    )
-    return [query.statement.columns.keys(), query.all()]
+
+    query = Building.query.all()
+
+    return query
 
 
 def get_building_height_stats_by_type():
